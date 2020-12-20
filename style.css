@@ -1,0 +1,16 @@
+.uvLow  {
+
+    background-color: green;
+
+}
+
+.uvMod {
+
+    background-color: yellow;
+}
+
+.uvHigh {
+
+    background-color: red;
+    color: white;
+}
