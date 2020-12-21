@@ -40,12 +40,14 @@ var addHumidity = $("<li>");
 var addWindIndex = $("<li>");
 var addUV = $("<li>");
 
+
 $(searchBtn).on("click", function () {
     var searchCity = $("#searchCity").val();
     var weatherQuery = "https://api.openweathermap.org/data/2.5/weather?q=" + searchCity + "&units=imperial&appid=" + APIKey;
     console.log("click")
     console.log(searchCity)
     
+    var date = moment().format("MM/DD/YYYY")
 
     $.ajax({
         url: weatherQuery,
@@ -56,7 +58,7 @@ $(searchBtn).on("click", function () {
         
         console.log (response);
 
-        var date = moment().format("MM/DD/YYYY")
+        //var date = moment().format("MM/DD/YYYY")
 
         var weatherIcon = response.weather[0].icon;
 
@@ -102,22 +104,31 @@ $(searchBtn).on("click", function () {
           method: "GET"
         }).then(function(index) {
 
-          $(addUV).text("UV Index: " + index.value);
+          var uvColor = $("<span>" + index.value + "</span>");
+          
+          $(addUV).text("UV Index: ");
+          $(addUV).append(uvColor);
           $(addUV).appendTo(addWindIndex);
   
-          console.log(index);
+          console.log(index.value);
+          console.log(uvColor)
+          console.log(addUV)
 
           if (index.value < 3) {
 
-            $(addUV).addClass("uvLow");
+            //var uvColor = $("<span>");
+
+            $(uvColor).addClass("uvLow");
+            //$(addUV).append(uvColor);
+            
 
           } else if (index.value >= 3 && index.value <= 7) {
 
-            $(addUV).addClass("uvMod");
+            $(uvColor).addClass("uvMod");
 
           } else if (index.value > 7) {
 
-            $(addUV).addClass("uvHigh");
+            $(uvColor).addClass("uvHigh");
 
           }
   
@@ -133,17 +144,38 @@ $(searchBtn).on("click", function () {
     
       });
 
-      //var fiveDayQuery = "https://api.openweathermap.org/data/2.5/forecast/daily?q=" + searchCity + "&appid=" + APIKey;
+      var fiveDayQuery = "https://api.openweathermap.org/data/2.5/forecast?q=" + searchCity  + "&cnt=5&units=imperial&appid=" + APIKey;
+      
+      console.log(fiveDayQuery)
 
-      // $.ajax({
-      //   url: fiveDayQuery,
-      //   method: "GET"
-      // }).then(function(response) {
+      $.ajax({
+        url: fiveDayQuery,
+        method: "GET"
+      }).then(function(days) {
+
+        console.log(days)
 
         
+        //5-day forecast that displays the date, an icon representation 
+        // of weather conditions, the temperature, and the humidity
+
+        for (var i = 0; i < days.list.length; i+= 5){
+
+          var fiveDay = $("#fiveDay");
+          //var nextDay = $("<p>");
+          //$(nextDay).text(date + days.list[i]);
+          //$(nextDay).appendTo(fiveDay);
+
+          var temp5 = $("<p>");
+          $(temp5).text(days.list[i].temp);
+          $(temp5).appendTo(fiveDay);
+          
 
 
-      // });
+        }
+
+
+      });
     
 });
 

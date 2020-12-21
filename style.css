@@ -1,6 +1,38 @@
+body{
+    background-color: #d0e8f2;
+    font-family: 'Antic Slab', serif;
+    font-size: large;
+}
+
+.navbar {
+    background-color: #456268;
+    color: #eaeaea;
+}
+
+.container {
+    margin-top: 10%;
+}
+
+#searchedData {
+    padding-left: 10%;
+    background-color: #f8f1f1;
+    color: #456268;
+    font-family: 'Antic Slab', serif;
+    font-size: large;
+    border-color: #456268;
+    border-style: solid;
+}
+
+/*
+#currentDayEl {
+    border-color: #456268;
+    border-style: solid;
+} */
+
 .uvLow  {
 
     background-color: green;
+    color: white;
 
 }
 
@@ -13,4 +45,16 @@
 
     background-color: red;
     color: white;
+}
+
+#fiveDay {
+    margin-top: 5%;
+    border-color: #456268;
+    border-style: solid;
+    margin: .5%;
+    background-color: pink;
+}
+
+p {
+    font-size: small;
 }
