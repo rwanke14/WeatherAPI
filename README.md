@@ -1,6 +1,11 @@
 # WeatherAPI
+This is a basic weather dashboard using an API from OpenWeather.com. 
 
-This is a basic weather dashboard using an API from OpenWeather.com. The following should occur when using the dashboard:
+Link to webpage: https://rwanke14.github.io/WeatherAPI/
+
+Link to github: https://github.com/rwanke14/WeatherAPI
+
+The following should occur when using the dashboard:
 
 GIVEN a weather dashboard with form inputs
 WHEN I search for a city
@@ -33,4 +38,4 @@ Validation:
 
 ![HTML Validation](./assets/images/HTMLvalidation.png)
 ![CSS Validation](./assets/images/CSSvalidation.png)
-![Javascript Validation](./assets/photos/Javascriptvalidation.png)
+![Javascript Validation](./assets/images/Javascriptvalidation.png)

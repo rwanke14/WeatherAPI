@@ -34,6 +34,8 @@ var addUV = $("<li>");
 
 var searchCity;
 
+//call 5 day elements so that I can set them to hidden when you open the page.
+
 var fiveDay1 = $("#fiveDay1");
 var fiveDay2 = $("#fiveDay2");
 var fiveDay3 = $("#fiveDay3");
@@ -57,19 +59,19 @@ var lastSearch = localStorage.getItem('city');
 if (lastSearch != null) {
   searchCity = lastSearch;
 
-  forecastCity(searchCity)
+  forecastCity(searchCity);
 }
 
 
 //This click event kicks off the search for the city and populates the forecast into the boxes and logs the storage.
 
 $(searchBtn).on("click", function (event) {
-  event.preventDefault()
+  event.preventDefault();
 
   searchCity = $("#searchCity").val();
   $("#searchCity").val("");
 
-  forecastCity(searchCity)
+  forecastCity(searchCity);
 
 
 });
@@ -94,17 +96,17 @@ function forecastCity(searchCity) {
 
   var weatherQuery = "https://api.openweathermap.org/data/2.5/weather?q=" + searchCity + "&units=imperial&appid=" + APIKey;
 
-  console.log("click")
-  console.log(searchCity)
+  console.log("click");
+  console.log(searchCity);
 
-  var date = moment().format("MM/DD/YYYY")
+  var date = moment().format("MM/DD/YYYY");
 
   $.ajax({
     url: weatherQuery,
     method: "GET"
   }).then(function (response) {
 
-    console.log(weatherQuery)
+    console.log(weatherQuery);
 
     console.log(response);
 
@@ -114,8 +116,8 @@ function forecastCity(searchCity) {
     var iconURL = "http://openweathermap.org/img/wn/" + weatherIcon + "@2x.png";
 
     addIcon.attr("src", iconURL);
-    addIcon.attr("class", "weatherImg")
-    console.log(iconURL)
+    addIcon.attr("class", "weatherImg");
+    console.log(iconURL);
 
 
     $(addCity).text(response.name + " (" + date + ") ");
@@ -123,22 +125,22 @@ function forecastCity(searchCity) {
     $(addIcon).appendTo(currentDayEl);
 
 
-    console.log(addDate)
+    console.log(addDate);
 
 
-    console.log(addIcon)
+    console.log(addIcon);
 
     $(addTemp).text("Temperature: " + response.main.temp + " F");
     $(addTemp).appendTo(addCity);
-    console.log(addTemp)
+    console.log(addTemp);
 
     $(addHumidity).text("Humidity: " + response.main.humidity + "%");
     $(addHumidity).appendTo(addTemp);
-    console.log(addHumidity)
+    console.log(addHumidity);
 
     $(addWindIndex).text("Wind Index: " + response.wind.speed);
     $(addWindIndex).appendTo(addHumidity);
-    console.log(addWindIndex)
+    console.log(addWindIndex);
 
 
 
@@ -164,8 +166,8 @@ function forecastCity(searchCity) {
       $(addUV).appendTo(addWindIndex);
 
       console.log(index.value);
-      console.log(uvColor)
-      console.log(addUV)
+      console.log(uvColor);
+      console.log(addUV);
 
       if (index.value < 3) {
 
@@ -191,24 +193,18 @@ function forecastCity(searchCity) {
 
   var fiveDayQuery = "https://api.openweathermap.org/data/2.5/forecast?q=" + searchCity + "&units=imperial&appid=" + APIKey;
 
-  console.log(fiveDayQuery)
+  console.log(fiveDayQuery);
 
   $.ajax({
     url: fiveDayQuery,
     method: "GET"
   }).then(function (days) {
 
-    console.log(days)
+    console.log(days);
 
 
     //5-day forecast that displays the date, an icon representation 
     // of weather conditions, the temperature, and the humidity
-
-    // var fiveDay1 = $("#fiveDay1");
-    // var fiveDay2 = $("#fiveDay2");
-    // var fiveDay3 = $("#fiveDay3");
-    // var fiveDay4 = $("#fiveDay4");
-    // var fiveDay5 = $("#fiveDay5");
 
     fiveDay1.attr("style", "visibility: visible");
     fiveDay2.attr("style", "visibility: visible");
@@ -221,7 +217,7 @@ function forecastCity(searchCity) {
     for (var i = 1; i < days.list.length - 1; i++) {
 
 
-      var fiveDay = moment(days.list[i].dt_txt).format("MM/DD/YYYY")
+      var fiveDay = moment(days.list[i].dt_txt).format("MM/DD/YYYY");
 
 
       //if statements pinpoint the timestamp I would like to pull data from - currently set to noon to get midday forecast.
@@ -257,17 +253,17 @@ function forecastCity(searchCity) {
         var weatherIcon = days.list[10].weather[0].icon;
         var iconURL = "http://openweathermap.org/img/wn/" + weatherIcon + "@2x.png";
         icon1.attr("src", iconURL);
-        icon1.attr("class", "weatherImg2")
+        icon1.attr("class", "weatherImg2");
         $(icon1).appendTo(fiveDay2);
-        console.log(icon1)
+        console.log(icon1);
 
         var temp1 = $("<p>");
-        (temp1).text("Temp: " + days.list[10].main.temp + " F");
-        (temp1).appendTo(fiveDay2);
+        $(temp1).text("Temp: " + days.list[10].main.temp + " F");
+        $(temp1).appendTo(fiveDay2);
 
         var humidity1 = $("<p>");
         $(humidity1).text("Humidity: " + days.list[10].main.humidity + "%");
-        (humidity1).appendTo(fiveDay2);
+        $(humidity1).appendTo(fiveDay2);
 
       }
       if (i == 18) {
@@ -303,9 +299,9 @@ function forecastCity(searchCity) {
         var weatherIcon = days.list[26].weather[0].icon;
         var iconURL = "http://openweathermap.org/img/wn/" + weatherIcon + "@2x.png";
         icon1.attr("src", iconURL);
-        icon1.attr("class", "weatherImg2")
+        icon1.attr("class", "weatherImg2");
         $(icon1).appendTo(fiveDay4);
-        console.log(icon1)
+        console.log(icon1);
 
         var temp1 = $("<p>");
         (temp1).text("Temp: " + days.list[26].main.temp + " F");
@@ -327,7 +323,7 @@ function forecastCity(searchCity) {
         icon1.attr("src", iconURL);
         icon1.attr("class", "weatherImg2");
         $(icon1).appendTo(fiveDay5);
-        console.log(icon1)
+        console.log(icon1);
 
         var temp1 = $("<p>");
         (temp1).text("Temp: " + days.list[34].main.temp + " F");
@@ -348,13 +344,13 @@ function forecastCity(searchCity) {
   //this calls the previously searched cities function and stops it from repeating when the cities are clicked again. 
 
   if (!prevSearches.includes(searchCity)) {
-    prevSearchedCities(searchCity)
+    prevSearchedCities(searchCity);
 
   };
 
   //Pushing stoarge to HTML
 
-  prevSearches.push(searchCity)
+  prevSearches.push(searchCity);
 
 }
 
@@ -380,13 +376,13 @@ function prevSearchedCities(searchCity) {
 
 $(document).on("click", ".cityBtn", function (event) {
 
-  event.preventDefault()
+  event.preventDefault();
 
   searchCity = $(event.target).text();
 
-  forecastCity(searchCity)
+  forecastCity(searchCity);
 
-  console.log(searchCity)
+  console.log(searchCity);
 
 });
 
