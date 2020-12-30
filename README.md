@@ -36,6 +36,6 @@ Photo of website:
 
 Validation:
 
-![HTML Validation](./assets/images/HTMLvalidation.png)
-![CSS Validation](./assets/images/CSSvalidation.png)
-![Javascript Validation](./assets/images/Javascriptvalidation.png)
+![HTML Validation](./assets/images/HTMLValidation.png)
+![CSS Validation](./assets/images/CSSValidation.png)
+![Javascript Validation](./assets/images/JavascriptValidation.png)
