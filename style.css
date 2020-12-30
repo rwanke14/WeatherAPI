@@ -14,7 +14,7 @@ body{
 }
 
 #searchedData {
-    background-color: #f8f1f1;
+    background-color: rgb(211, 211, 211);
     color: #456268;
     font-family: 'Antic Slab', serif;
     font-size: large;

@@ -44,7 +44,28 @@ var addUV = $("<li>");
 
 
 var searchCity;
-var logCity;
+
+
+// if () {
+
+// }
+
+
+//Many thanks to Johnnie and Frankie for their help in talking through how to better set up my local storage & parameters! Their githubs are noted in my readMe.
+
+//Setting up getItem to grab city details and save them when refreshed.
+//array for stored cities
+
+var prevSearches = [];
+
+    var lastSearch = localStorage.getItem('city');
+
+    if (lastSearch != null) {
+        searchCity = lastSearch;
+        
+        forecastCity(searchCity)
+    }
+
 
 
 
@@ -55,10 +76,15 @@ $(searchBtn).on("click", function (event) {
   $("#searchCity").val("");
 
   forecastCity(searchCity)
+ 
+  //prevSearchedCities(searchCity)
+
 });
 
 function forecastCity(searchCity) {
 
+  //when page refreshes - previous city searched appears (thanks to Johnnie for the insight on how to connect the dots here!!)
+  prevSearchedCities(searchCity)
 
   //clear forecast boxes when new city is entered so that new information shows at top.
   $(fiveDay1).empty();
@@ -67,16 +93,9 @@ function forecastCity(searchCity) {
   $(fiveDay4).empty();
   $(fiveDay5).empty();
 
-
-  localStorage.setItem("prevSearched", JSON.stringify(prevSearched));
-  // if (prevSearched.includes(searchCity) === false){
-  //   console.log(prevSearched.includes(logCity))
-  //   prevSearched.push(logCity)
-  // }
-  //localStorage.setItem("city", searchCity);
-  console.log(localStorage.getItem(logCity));
-
-
+  
+  var storeCity = localStorage.setItem('city', searchCity);
+  
 
   var weatherQuery = "https://api.openweathermap.org/data/2.5/weather?q=" + searchCity + "&units=imperial&appid=" + APIKey;
   console.log("click")
@@ -125,6 +144,10 @@ function forecastCity(searchCity) {
     $(addWindIndex).appendTo(addHumidity);
     console.log(addWindIndex)
 
+
+    if (!prevSearches.includes(searchCity)) {
+      prevSearchedCities(searchCity)
+    };
 
 
 
@@ -299,7 +322,7 @@ function forecastCity(searchCity) {
         var weatherIcon = days.list[34].weather[0].icon;
         var iconURL = "http://openweathermap.org/img/wn/" + weatherIcon + "@2x.png";
         icon1.attr("src", iconURL);
-        icon1.attr("class", "weatherImg2")
+        icon1.attr("class", "weatherImg2");
         $(icon1).appendTo(fiveDay5);
         console.log(icon1)
 
@@ -317,18 +340,20 @@ function forecastCity(searchCity) {
       // if the value is not equal to -1, then that means that value exists
       //create p tags for those value that match
      
-
+      //prevSearched.includes(logCity) === false
     }
 
-    if (prevSearched.includes(searchCity) === false) {
-      //   console.log(prevSearched.includes(logCity))
+    // if (prevSearched.includes(searchCity) === false) {
+    //   //   console.log(prevSearched.includes(logCity))
       
-      prevSearched.push(logCity)
-      prevSearchedCities(logCity)
-    }
+    //   prevSearched.push(logCity)
+    //   prevSearchedCities(logCity)
+    
+    // } 
 
   });
 
+  prevSearches.push(searchCity)
 
 }
 //});
@@ -336,9 +361,21 @@ function forecastCity(searchCity) {
 
 
 //set up local history
-var prevSearched = JSON.parse(localStorage.getItem("prevSearched")) || [];
+//var prevSearched = JSON.parse(localStorage.getItem("prevSearched")) || [];
 
-function prevSearchedCities(logCity) {
+// var storedCity = localStorage.getItem("city")
+// var prevSearched = [];
+
+// if (prevSearched != null) {
+
+//   searchCity = prevSearched;
+
+//   // $(searchedData).attr("style", "visibility");
+//   // searchedData
+//   forecastCity(searchCity)
+// }
+
+function prevSearchedCities(searchCity) {
 
 
   // if (prevSearched.includes(logCity) === false){
@@ -347,10 +384,10 @@ function prevSearchedCities(logCity) {
   // }
   //searchedCities.push(searchCity);
 
-  //prevSearched.push(logCity)
-  console.log(logCity)
+  
+  
 
-  for (var i = 1; i < prevSearched.length; i++) {
+  //for (var i = 1; i < prevSearched.length; i++) {
 
     var cityListEl = $("<ul>");
     var cityEl = $("<button>");
@@ -360,25 +397,22 @@ function prevSearchedCities(logCity) {
     $(cityListEl).appendTo(searchResults);
     $(cityEl).appendTo(cityListEl);
 
-    if (i !== prevSearched.length) {
+   
 
-      logCity.empty()
+    //   if (i !== prevSearched.length) {
 
-    }
+    //    logCity.empty()
 
-    if (prevSearched.includes(logCity) === false) {
-      console.log(prevSearched.includes(logCity))
-      prevSearched.push(logCity)
-    }
+    //  }
 
-
-  }
-
+    //  if (prevSearched.includes(logCity) === false) {
+    //   console.log(prevSearched.includes(logCity))
+    //   pastSearches.push(searchCity)
+    // }
 
 
-  //need to set click for previously searched so text comes back up & make sure when you refresh the text shows back up with boxes.
-
-
+    
+  //}
 
 }
 
