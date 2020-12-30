@@ -120,3 +120,21 @@ p {
     color: white;
 
 }
+
+.cityBtn {
+
+    background-color: #456268;
+    font-family: 'Antic Slab', serif;
+    font-size: large;
+    color: white;
+    border-color: #456268;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+
+}
+

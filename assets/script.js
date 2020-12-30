@@ -13,18 +13,7 @@
 // THEN I am presented with the last searched city forecast
 
 
-
-/*
-Dashboard:
--Weather API
--search input bar for looking up the city
--card area for displaying city you looked up and the days current details
--cards for the next 5 days.
--City added to search history - sits at side and you can go back to it.
--local storage keeps what you have been searching and when you return it you still see it.
-*/
-
-
+//Setting up global variables.
 
 var APIKey = "d36c6b6f4fc6a7326b1f10197ffd5d6d";
 
@@ -46,10 +35,6 @@ var addUV = $("<li>");
 var searchCity;
 
 
-// if () {
-
-// }
-
 
 //Many thanks to Johnnie and Frankie for their help in talking through how to better set up my local storage & parameters! Their githubs are noted in my readMe.
 
@@ -67,7 +52,7 @@ var prevSearches = [];
     }
 
 
-
+//This click event kicks off the search for the city and populates the forecast into the boxes and logs the storage.
 
 $(searchBtn).on("click", function (event) {
   event.preventDefault()
@@ -76,15 +61,12 @@ $(searchBtn).on("click", function (event) {
   $("#searchCity").val("");
 
   forecastCity(searchCity)
- 
-  //prevSearchedCities(searchCity)
+
 
 });
 
 function forecastCity(searchCity) {
 
-  //when page refreshes - previous city searched appears (thanks to Johnnie for the insight on how to connect the dots here!!)
-  prevSearchedCities(searchCity)
 
   //clear forecast boxes when new city is entered so that new information shows at top.
   $(fiveDay1).empty();
@@ -93,11 +75,16 @@ function forecastCity(searchCity) {
   $(fiveDay4).empty();
   $(fiveDay5).empty();
 
-  
-  var storeCity = localStorage.setItem('city', searchCity);
+
+  //setting local storage value to city I have searched.
+
+  localStorage.setItem('city', searchCity);
   
 
+  //This section sets up the main content query for the current day forecast.
+
   var weatherQuery = "https://api.openweathermap.org/data/2.5/weather?q=" + searchCity + "&units=imperial&appid=" + APIKey;
+  
   console.log("click")
   console.log(searchCity)
 
@@ -145,9 +132,7 @@ function forecastCity(searchCity) {
     console.log(addWindIndex)
 
 
-    if (!prevSearches.includes(searchCity)) {
-      prevSearchedCities(searchCity)
-    };
+    
 
 
 
@@ -193,6 +178,7 @@ function forecastCity(searchCity) {
 
   });
 
+  //setting up the query for the 5 day forecast with a new link to pull information from the array.
 
   var fiveDayQuery = "https://api.openweathermap.org/data/2.5/forecast?q=" + searchCity + "&units=imperial&appid=" + APIKey;
 
@@ -208,12 +194,14 @@ function forecastCity(searchCity) {
 
     //5-day forecast that displays the date, an icon representation 
     // of weather conditions, the temperature, and the humidity
+
     var fiveDay1 = $("#fiveDay1");
     var fiveDay2 = $("#fiveDay2");
     var fiveDay3 = $("#fiveDay3");
     var fiveDay4 = $("#fiveDay4");
     var fiveDay5 = $("#fiveDay5");
 
+    //Looping through each box to create new content and append to boxes.
 
     for (var i = 1; i < days.list.length - 1; i++) {
 
@@ -221,7 +209,7 @@ function forecastCity(searchCity) {
       var fiveDay = moment(days.list[i].dt_txt).format("MM/DD/YYYY")
 
 
-
+      //if statements pinpoint the timestamp I would like to pull data from - currently set to noon to get midday forecast.
       if (i == 2) {
 
         var nextDay = $("<p>");
@@ -336,58 +324,30 @@ function forecastCity(searchCity) {
 
       }
 
-      //search()
-      // if the value is not equal to -1, then that means that value exists
-      //create p tags for those value that match
-     
-      //prevSearched.includes(logCity) === false
+
     }
 
-    // if (prevSearched.includes(searchCity) === false) {
-    //   //   console.log(prevSearched.includes(logCity))
-      
-    //   prevSearched.push(logCity)
-    //   prevSearchedCities(logCity)
-    
-    // } 
 
   });
+
+  //this calls the previously searched cities function and stops it from repeating when the cities are clicked again. 
+
+  if (!prevSearches.includes(searchCity)) {
+      prevSearchedCities(searchCity)
+
+    };
+
+//Pushing stoarge to HTML
 
   prevSearches.push(searchCity)
 
 }
-//});
 
 
 
-//set up local history
-//var prevSearched = JSON.parse(localStorage.getItem("prevSearched")) || [];
-
-// var storedCity = localStorage.getItem("city")
-// var prevSearched = [];
-
-// if (prevSearched != null) {
-
-//   searchCity = prevSearched;
-
-//   // $(searchedData).attr("style", "visibility");
-//   // searchedData
-//   forecastCity(searchCity)
-// }
+//set up list buttons for previously searched cities.
 
 function prevSearchedCities(searchCity) {
-
-
-  // if (prevSearched.includes(logCity) === false){
-  //   console.log(prevSearched.includes(logCity))
-  //   prevSearched.push(logCity)
-  // }
-  //searchedCities.push(searchCity);
-
-  
-  
-
-  //for (var i = 1; i < prevSearched.length; i++) {
 
     var cityListEl = $("<ul>");
     var cityEl = $("<button>");
@@ -397,26 +357,11 @@ function prevSearchedCities(searchCity) {
     $(cityListEl).appendTo(searchResults);
     $(cityEl).appendTo(cityListEl);
 
-   
-
-    //   if (i !== prevSearched.length) {
-
-    //    logCity.empty()
-
-    //  }
-
-    //  if (prevSearched.includes(logCity) === false) {
-    //   console.log(prevSearched.includes(logCity))
-    //   pastSearches.push(searchCity)
-    // }
-
-
-    
-  //}
-
 }
 
-// var cityEl = $("<button>");
+
+//When City previously searched is clicked then the information on it is brought back up. Worked with my tutor on this section to figure out why the button wasn't working.
+
 
 $(document).on("click", ".cityBtn", function (event) {
 
@@ -426,9 +371,7 @@ $(document).on("click", ".cityBtn", function (event) {
 
   forecastCity(searchCity)
 
-  console.log(searchCity)
-
-  //   createSearch() 
+  console.log(searchCity) 
 
 });
 
