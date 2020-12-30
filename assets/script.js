@@ -34,8 +34,17 @@ var addUV = $("<li>");
 
 var searchCity;
 
+var fiveDay1 = $("#fiveDay1");
+var fiveDay2 = $("#fiveDay2");
+var fiveDay3 = $("#fiveDay3");
+var fiveDay4 = $("#fiveDay4");
+var fiveDay5 = $("#fiveDay5");
 
-
+fiveDay1.attr("style", "visibility: hidden");
+fiveDay2.attr("style", "visibility: hidden");
+fiveDay3.attr("style", "visibility: hidden");
+fiveDay4.attr("style", "visibility: hidden");
+fiveDay5.attr("style", "visibility: hidden");
 //Many thanks to Johnnie and Frankie for their help in talking through how to better set up my local storage & parameters! Their githubs are noted in my readMe.
 
 //Setting up getItem to grab city details and save them when refreshed.
@@ -43,13 +52,13 @@ var searchCity;
 
 var prevSearches = [];
 
-    var lastSearch = localStorage.getItem('city');
+var lastSearch = localStorage.getItem('city');
 
-    if (lastSearch != null) {
-        searchCity = lastSearch;
-        
-        forecastCity(searchCity)
-    }
+if (lastSearch != null) {
+  searchCity = lastSearch;
+
+  forecastCity(searchCity)
+}
 
 
 //This click event kicks off the search for the city and populates the forecast into the boxes and logs the storage.
@@ -79,12 +88,12 @@ function forecastCity(searchCity) {
   //setting local storage value to city I have searched.
 
   localStorage.setItem('city', searchCity);
-  
+
 
   //This section sets up the main content query for the current day forecast.
 
   var weatherQuery = "https://api.openweathermap.org/data/2.5/weather?q=" + searchCity + "&units=imperial&appid=" + APIKey;
-  
+
   console.log("click")
   console.log(searchCity)
 
@@ -132,7 +141,7 @@ function forecastCity(searchCity) {
     console.log(addWindIndex)
 
 
-    
+
 
 
 
@@ -195,11 +204,17 @@ function forecastCity(searchCity) {
     //5-day forecast that displays the date, an icon representation 
     // of weather conditions, the temperature, and the humidity
 
-    var fiveDay1 = $("#fiveDay1");
-    var fiveDay2 = $("#fiveDay2");
-    var fiveDay3 = $("#fiveDay3");
-    var fiveDay4 = $("#fiveDay4");
-    var fiveDay5 = $("#fiveDay5");
+    // var fiveDay1 = $("#fiveDay1");
+    // var fiveDay2 = $("#fiveDay2");
+    // var fiveDay3 = $("#fiveDay3");
+    // var fiveDay4 = $("#fiveDay4");
+    // var fiveDay5 = $("#fiveDay5");
+
+    fiveDay1.attr("style", "visibility: visible");
+    fiveDay2.attr("style", "visibility: visible");
+    fiveDay3.attr("style", "visibility: visible");
+    fiveDay4.attr("style", "visibility: visible");
+    fiveDay5.attr("style", "visibility: visible");
 
     //Looping through each box to create new content and append to boxes.
 
@@ -333,11 +348,11 @@ function forecastCity(searchCity) {
   //this calls the previously searched cities function and stops it from repeating when the cities are clicked again. 
 
   if (!prevSearches.includes(searchCity)) {
-      prevSearchedCities(searchCity)
+    prevSearchedCities(searchCity)
 
-    };
+  };
 
-//Pushing stoarge to HTML
+  //Pushing stoarge to HTML
 
   prevSearches.push(searchCity)
 
@@ -349,13 +364,13 @@ function forecastCity(searchCity) {
 
 function prevSearchedCities(searchCity) {
 
-    var cityListEl = $("<ul>");
-    var cityEl = $("<button>");
-    $(cityEl).attr("class", "cityBtn");
+  var cityListEl = $("<ul>");
+  var cityEl = $("<button>");
+  $(cityEl).attr("class", "cityBtn");
 
-    $(cityEl).text(searchCity);
-    $(cityListEl).appendTo(searchResults);
-    $(cityEl).appendTo(cityListEl);
+  $(cityEl).text(searchCity);
+  $(cityListEl).appendTo(searchResults);
+  $(cityEl).appendTo(cityListEl);
 
 }
 
@@ -371,7 +386,7 @@ $(document).on("click", ".cityBtn", function (event) {
 
   forecastCity(searchCity)
 
-  console.log(searchCity) 
+  console.log(searchCity)
 
 });
 
