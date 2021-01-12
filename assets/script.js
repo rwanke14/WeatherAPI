@@ -113,7 +113,7 @@ function forecastCity(searchCity) {
 
     var weatherIcon = response.weather[0].icon;
 
-    var iconURL = "http://openweathermap.org/img/wn/" + weatherIcon + "@2x.png";
+    var iconURL = "https://openweathermap.org/img/wn/" + weatherIcon + "@2x.png";
 
     addIcon.attr("src", iconURL);
     addIcon.attr("class", "weatherImg");
@@ -152,7 +152,7 @@ function forecastCity(searchCity) {
     var cityLat = response.coord.lat;
     var cityLon = response.coord.lon;
 
-    var UVIndex = "http://api.openweathermap.org/data/2.5/uvi?lat=" + cityLat + "&lon=" + cityLon + "&appid=" + APIKey;
+    var UVIndex = "https://api.openweathermap.org/data/2.5/uvi?lat=" + cityLat + "&lon=" + cityLon + "&appid=" + APIKey;
 
     $.ajax({
       url: UVIndex,
@@ -229,7 +229,7 @@ function forecastCity(searchCity) {
 
         var icon1 = $("<img>");
         var weatherIcon = days.list[2].weather[0].icon;
-        var iconURL = "http://openweathermap.org/img/wn/" + weatherIcon + "@2x.png";
+        var iconURL = "https://openweathermap.org/img/wn/" + weatherIcon + "@2x.png";
         icon1.attr("src", iconURL);
         icon1.attr("class", "weatherImg2")
         $(icon1).appendTo(fiveDay1);
@@ -251,7 +251,7 @@ function forecastCity(searchCity) {
 
         var icon1 = $("<img>");
         var weatherIcon = days.list[10].weather[0].icon;
-        var iconURL = "http://openweathermap.org/img/wn/" + weatherIcon + "@2x.png";
+        var iconURL = "https://openweathermap.org/img/wn/" + weatherIcon + "@2x.png";
         icon1.attr("src", iconURL);
         icon1.attr("class", "weatherImg2");
         $(icon1).appendTo(fiveDay2);
@@ -274,7 +274,7 @@ function forecastCity(searchCity) {
 
         var icon1 = $("<img>");
         var weatherIcon = days.list[18].weather[0].icon;
-        var iconURL = "http://openweathermap.org/img/wn/" + weatherIcon + "@2x.png";
+        var iconURL = "https://openweathermap.org/img/wn/" + weatherIcon + "@2x.png";
         icon1.attr("src", iconURL);
         icon1.attr("class", "weatherImg2")
         $(icon1).appendTo(fiveDay3);
@@ -297,7 +297,7 @@ function forecastCity(searchCity) {
 
         var icon1 = $("<img>");
         var weatherIcon = days.list[26].weather[0].icon;
-        var iconURL = "http://openweathermap.org/img/wn/" + weatherIcon + "@2x.png";
+        var iconURL = "https://openweathermap.org/img/wn/" + weatherIcon + "@2x.png";
         icon1.attr("src", iconURL);
         icon1.attr("class", "weatherImg2");
         $(icon1).appendTo(fiveDay4);
@@ -319,7 +319,7 @@ function forecastCity(searchCity) {
 
         var icon1 = $("<img>");
         var weatherIcon = days.list[34].weather[0].icon;
-        var iconURL = "http://openweathermap.org/img/wn/" + weatherIcon + "@2x.png";
+        var iconURL = "https://openweathermap.org/img/wn/" + weatherIcon + "@2x.png";
         icon1.attr("src", iconURL);
         icon1.attr("class", "weatherImg2");
         $(icon1).appendTo(fiveDay5);
